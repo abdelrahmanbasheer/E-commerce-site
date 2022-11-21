@@ -8,9 +8,9 @@ const SecondHero = () => {
     <div className='mt-10  bg-white p-7  justify-center'>
    <div className="grid grid-cols-2 gap-5">
     {spring.map((spr)=>(
-        <div className="">
+        <div key={spr.title} className="">
         <Link href={"/men" || "/women"} >
-<Image src={spr.src} width={800} height={500} className="cursor-pointer rounded-xl "></Image>
+<Image src={spr.src}  width={800} height={500} className="cursor-pointer rounded-xl "></Image>
 </Link>
 <h1 className='text-center text-xl m-2 capitalize font-semibold'>{spr.title}</h1>
 

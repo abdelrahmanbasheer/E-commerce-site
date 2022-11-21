@@ -66,10 +66,10 @@ const men = () => {
         <ul className="flex flex-wrap justify-center">
         {clothes.map((cloth)=>(
           
-          <Link href={`/men/${cloth.id}`}>
+          <Link key={cloth.title} href={`/men/${cloth.id}`}>
           <li className=' m-5 '>
             <img className='cursor-pointer rounded-t-lg w-[400px] h-[300px]' src={cloth.img.src} alt={cloth.title} />
-          <div className='bg-white font-semibold h-[60px] rounded-b-lg p-2'>
+          <div   className='bg-white font-semibold h-[60px] rounded-b-lg p-2'>
             <h1 className='ml-4'>{cloth.title}</h1>
             <h3>{cloth.price}</h3>
           </div>
