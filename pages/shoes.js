@@ -96,7 +96,7 @@ const Shoes = () => {
         <ul className="flex flex-wrap justify-center">
           {finalclothes.map((cloth) => (
            
-              <li className=" m-5 ">
+              <li key={cloth.title} className=" m-5 ">
                  <Link key={cloth.title} href={`/men/${cloth.id}`}>
 
                 <img

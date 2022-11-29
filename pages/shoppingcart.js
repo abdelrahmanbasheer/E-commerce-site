@@ -14,7 +14,7 @@ const Shoppingcart = () => {
         <button onClick={()=>removeAll()} className="float-right rounded-full text-black p-2 bg-white">remove all items</button>
         <ul className=" flex flex-wrap overflow-hidden ">
           {items.map((item) => (
-            <li className="bg-white w-[300px]  m-4 rounded-lg" key={item.name}>
+            <li key={item.name} className="bg-white w-[300px]  m-4 rounded-lg" >
               <img
                 className="w-[300px] h-[200px]   rounded-t-md"
                 src={item.img.src}
