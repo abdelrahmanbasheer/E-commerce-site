@@ -7,59 +7,53 @@ import americaneagle_spring from "../public/images/spring-2.jpeg";
 import armani_spring from "../public/images/spring-3.jpg";
 import uspolo_spring from "../public/images/spring04.jpg";
 import { finalList } from "../utils/store";
-const Men = () => {
-  const clothes = [
+const Shoes = () => {
+  const shoes = [
     {
-      title: "pant-1",
+      title: "shoe-1",
       img: americaneagle_spring,
       price: "18.99$",
       id: "1",
-      type: "pants",
+      type: "walking",
     },
     {
-      title: "shirt-1",
+        title: "shoe-2",
       img: hollister_spring,
       price: "18.99$",
       id: "2",
-      type: "shirt",
+      type: "walking",
     },
     {
-      title: "Jacket-1",
+      title: "shoe-3",
       img: armani_spring,
       price: "18.99$",
       id: "3",
-      type: "jacket",
+      type: "formal",
     },
     {
-      title: "shirt-2",
+      title: "shoe-4",
       img: uspolo_spring,
       price: "18.99$",
       id: "4",
-      type: "shirt",
+      type: "running",
     },
 
-    {
-      title: "Jacket-2",
-      img: uspolo_spring,
-      price: "18.99$",
-      id: "4",
-      type: "jacket",
-    },
+
   ];
 
-  const filterShirts = () => {
-    setFinalclothes(clothes.filter((cloth) => cloth.type === "shirt"));
+  const filterWalking = () => {
+    setFinalclothes(shoes.filter((cloth) => cloth.type === "walking"));
     console.log(finalclothes);
   };
-  const filterJackets = () => {
-    setFinalclothes(clothes.filter((cloth) => cloth.type === "jacket"));
+  const filterFormal= () => {
+    setFinalclothes(shoes.filter((cloth) => cloth.type === "formal"));
     console.log(finalclothes);
   };
-  const filterPants = () => {
-    setFinalclothes(clothes.filter((cloth) => cloth.type === "pants"));
+  const filterRunning = () => {
+    setFinalclothes(shoes.filter((cloth) => cloth.type === "running"));
     console.log(finalclothes);
   };
-  const [finalclothes, setFinalclothes] = useState(clothes);
+  const [finalclothes, setFinalclothes] = useState(shoes);
   const addToCart = finalList((state) => state.addToCart);
   let items=finalList((state)=>state.items)
   return (
@@ -70,28 +64,28 @@ const Men = () => {
       <div className="bg-black ">
         <div className="flex gap-20 p-5 justify-center">
           <button
-            onClick={() => filterShirts()}
+            onClick={() => filterWalking()}
             className="text-white bg-red-800 p-4 
       font-semibold w-[90px] rounded-full"
           >
-            Shirts
+            Walking
           </button>
           <button
-            onClick={() => filterPants()}
+            onClick={() => filterFormal()}
             className="text-white bg-red-800 p-4 
       font-semibold w-[90px] rounded-full"
           >
-            Pants
+            Formal
           </button>
           <button
-            onClick={() => filterJackets()}
+            onClick={() => filterRunning()}
             className="text-white bg-red-800 p-4 
       font-semibold w-[90px] rounded-full"
           >
-            Jackets
+            Running
           </button>
           <button
-            onClick={() => setFinalclothes(clothes)}
+            onClick={() => setFinalclothes(shoes)}
             className="text-white bg-red-800 p-4 
       font-semibold w-[90px] rounded-full"
           >
@@ -130,4 +124,4 @@ const Men = () => {
   );
 };
 
-export default Men;
+export default Shoes;

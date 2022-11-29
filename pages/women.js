@@ -7,7 +7,7 @@ import americaneagle_spring from "../public/images/spring-2.jpeg";
 import armani_spring from "../public/images/spring-3.jpg";
 import uspolo_spring from "../public/images/spring04.jpg";
 import { finalList } from "../utils/store";
-const Men = () => {
+const Women = () => {
   const clothes = [
     {
       title: "pant-1",
@@ -130,4 +130,4 @@ const Men = () => {
   );
 };
 
-export default Men;
+export default Women;
