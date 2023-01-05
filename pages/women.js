@@ -1,65 +1,37 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-
-import hollister_spring from "../public/images/spring-1.jpg";
-import americaneagle_spring from "../public/images/spring-2.jpeg";
-import armani_spring from "../public/images/spring-3.jpg";
-import uspolo_spring from "../public/images/spring04.jpg";
+import { getWomenItems } from "../utils/graphQL";
 import { finalList } from "../utils/store";
 const Women = () => {
-  const clothes = [
-    {
-      title: "pant-1",
-      img: americaneagle_spring,
-      price: "18.99$",
-      id: "1",
-      type: "pants",
-    },
-    {
-      title: "shirt-1",
-      img: hollister_spring,
-      price: "18.99$",
-      id: "2",
-      type: "shirt",
-    },
-    {
-      title: "Jacket-1",
-      img: armani_spring,
-      price: "18.99$",
-      id: "3",
-      type: "jacket",
-    },
-    {
-      title: "shirt-2",
-      img: uspolo_spring,
-      price: "18.99$",
-      id: "4",
-      type: "shirt",
-    },
 
-    {
-      title: "Jacket-2",
-      img: uspolo_spring,
-      price: "18.99$",
-      id: "4",
-      type: "jacket",
-    },
-  ];
-
+  const getAll=()=>{   
+    getWomenItems().then((reswomen)=>setFinalclothes(reswomen)) 
+  }
+  useEffect(() => {
+    getAll()
+    }, [])
+    
   const filterShirts = () => {
-    setFinalclothes(clothes.filter((cloth) => cloth.type === "shirt"));
-    console.log(finalclothes);
+    setFinalclothes(finalclothes.filter((cloth) => cloth.type === "shirt"));
+    setTimeout(() => {
+      getAll()
+    }, 4000);
   };
   const filterJackets = () => {
-    setFinalclothes(clothes.filter((cloth) => cloth.type === "jacket"));
-    console.log(finalclothes);
+    setFinalclothes(finalclothes.filter((cloth) => cloth.type === "jacket"));
+    setTimeout(() => {
+      getAll()
+    }, 4000);
   };
   const filterPants = () => {
-    setFinalclothes(clothes.filter((cloth) => cloth.type === "pants"));
-    console.log(finalclothes);
+    setFinalclothes(finalclothes.filter((cloth) => cloth.type === "pants"));
+    setTimeout(() => {
+      getAll()
+    }, 4000);
+   
   };
-  const [finalclothes, setFinalclothes] = useState(clothes);
+  const [finalclothes, setFinalclothes] = useState([]);
   const addToCart = finalList((state) => state.addToCart);
   let items = finalList((state) => state.items);
   return (
@@ -91,7 +63,7 @@ const Women = () => {
             Jackets
           </button>
           <button
-            onClick={() => setFinalclothes(clothes)}
+            onClick={() => getAll()}
             className="text-white bg-red-800 p-4 
       font-semibold w-[90px] rounded-full"
           >
@@ -104,14 +76,14 @@ const Women = () => {
             <li key={cloth.title} className=" m-5 ">
               <Link key={cloth.title} href={`/men/${cloth.id}`}>
                 <img
-                  className="cursor-pointer rounded-t-lg w-[400px] h-[300px]"
-                  src={cloth.img.src}
+                  className="cursor-pointer rounded-t-lg w-[700px] h-[700px]"
+                  src={cloth.mainimg.url}
                   alt={cloth.title}
                 />
               </Link>
               <div className="bg-white font-semibold h-[60px] rounded-b-lg p-2 flex text-center justify-between">
                 <h1 className="ml-4">{cloth.title}</h1>
-                <h3 className="ml-4">{cloth.price}</h3>
+                <h3 className="ml-4">{cloth.price}$</h3>
                 <button
                   onClick={() => addToCart(cloth)}
                   className="text-white float-right bg-green-900 p-2 text-center rounded-full"
