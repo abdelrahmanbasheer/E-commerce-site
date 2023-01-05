@@ -1,61 +1,45 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-
-import hollister_spring from "../public/images/spring-1.jpg";
-import americaneagle_spring from "../public/images/spring-2.jpeg";
-import armani_spring from "../public/images/spring-3.jpg";
-import uspolo_spring from "../public/images/spring04.jpg";
+import { getShoes, getShoesRunning, getShoesWalking } from "../utils/graphQL";
 import { finalList } from "../utils/store";
 const Shoes = () => {
-  const shoes = [
-    {
-      title: "shoe-1",
-      img: americaneagle_spring,
-      price: "18.99$",
-      id: "1",
-      type: "walking",
-    },
-    {
-        title: "shoe-2",
-      img: hollister_spring,
-      price: "18.99$",
-      id: "2",
-      type: "walking",
-    },
-    {
-      title: "shoe-3",
-      img: armani_spring,
-      price: "18.99$",
-      id: "3",
-      type: "formal",
-    },
-    {
-      title: "shoe-4",
-      img: uspolo_spring,
-      price: "18.99$",
-      id: "4",
-      type: "running",
-    },
 
-
-  ];
-
+  const getAll=()=>{
+    getShoes().then((resShoes)=>setFinalclothes(resShoes))
+    }
+    useEffect(() => {
+    getAll()
+    }, [])
+    
   const filterWalking = () => {
-    setFinalclothes(shoes.filter((cloth) => cloth.type === "walking"));
-    console.log(finalclothes);
+   
+    setFinalclothes(finalclothes.filter((cloth) => cloth.type === "walking"));
+    setTimeout(() => {
+      getAll()
+    }, 1000);
+    
   };
-  const filterFormal= () => {
-    setFinalclothes(shoes.filter((cloth) => cloth.type === "formal"));
-    console.log(finalclothes);
+  const filterCasual= () => {
+    
+    setFinalclothes(finalclothes.filter((cloth) => cloth.type === "casual"));
+    setTimeout(() => {
+      getAll()
+    }, 1000);
+    
   };
   const filterRunning = () => {
-    setFinalclothes(shoes.filter((cloth) => cloth.type === "running"));
-    console.log(finalclothes);
+    
+    setFinalclothes(finalclothes.filter((cloth) => cloth.type === "running"));
+    setTimeout(() => {
+      getAll()
+    }, 1000);
+    
+    
   };
-  const [finalclothes, setFinalclothes] = useState(shoes);
+  const [finalclothes, setFinalclothes] = useState([]);
+
   const addToCart = finalList((state) => state.addToCart);
-  let items=finalList((state)=>state.items)
   return (
     <div className="">
       <div className="sm:bg-men bg-men-mobile w-[700px]  md:w-[100%]  h-[700px]">
@@ -71,11 +55,11 @@ const Shoes = () => {
             Walking
           </button>
           <button
-            onClick={() => filterFormal()}
+            onClick={() => filterCasual()}
             className="text-white bg-red-800 p-4 
       font-semibold w-[90px] rounded-full"
           >
-            Formal
+            casual
           </button>
           <button
             onClick={() => filterRunning()}
@@ -85,29 +69,29 @@ const Shoes = () => {
             Running
           </button>
           <button
-            onClick={() => setFinalclothes(shoes)}
+            onClick={() => getAll()}
             className="text-white bg-red-800 p-4 
       font-semibold w-[90px] rounded-full"
           >
             View all
           </button>
         </div>
-        {console.log(items)}
+        
         <ul className="flex flex-wrap justify-center">
           {finalclothes.map((cloth) => (
            
               <li key={cloth.title} className=" m-5 ">
-                 <Link key={cloth.title} href={`/men/${cloth.id}`}>
+                 <Link key={cloth.title} href={`/men/${cloth.productId}`}>
 
                 <img
                   className="cursor-pointer rounded-t-lg w-[400px] h-[300px]"
-                  src={cloth.img.src}
+                  src={cloth.mainimg.url}
                   alt={cloth.title}
                 />
                  </Link>
                 <div className="bg-white font-semibold h-[60px] rounded-b-lg p-2 flex text-center justify-between">
-                  <h1 className="ml-4">{cloth.title}</h1>
-                  <h3 className="ml-4">{cloth.price}</h3>
+                  <h1 className="ml-4">{cloth.title.substring(0,30)}</h1>
+                  <h3 className="ml-4">{cloth.price}$</h3>
                   <button
                     onClick={() => addToCart(cloth)}
                     className="text-white float-right bg-green-900 p-2 text-center rounded-full"

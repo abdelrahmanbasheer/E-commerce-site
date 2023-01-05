@@ -61,7 +61,7 @@ const Women = () => {
   };
   const [finalclothes, setFinalclothes] = useState(clothes);
   const addToCart = finalList((state) => state.addToCart);
-  let items=finalList((state)=>state.items)
+  let items = finalList((state) => state.items);
   return (
     <div className="">
       <div className="sm:bg-men bg-men-mobile w-[700px]  md:w-[100%]  h-[700px]">
@@ -101,28 +101,25 @@ const Women = () => {
         {console.log(items)}
         <ul className="flex flex-wrap justify-center">
           {finalclothes.map((cloth) => (
-           
-              <li key={cloth.title} className=" m-5 ">
-                 <Link key={cloth.title} href={`/men/${cloth.id}`}>
-
+            <li key={cloth.title} className=" m-5 ">
+              <Link key={cloth.title} href={`/men/${cloth.id}`}>
                 <img
                   className="cursor-pointer rounded-t-lg w-[400px] h-[300px]"
                   src={cloth.img.src}
                   alt={cloth.title}
                 />
-                 </Link>
-                <div className="bg-white font-semibold h-[60px] rounded-b-lg p-2 flex text-center justify-between">
-                  <h1 className="ml-4">{cloth.title}</h1>
-                  <h3 className="ml-4">{cloth.price}</h3>
-                  <button
-                    onClick={() => addToCart(cloth)}
-                    className="text-white float-right bg-green-900 p-2 text-center rounded-full"
-                  >
-                    add to cart
-                  </button>
-                </div>
-              </li>
-            
+              </Link>
+              <div className="bg-white font-semibold h-[60px] rounded-b-lg p-2 flex text-center justify-between">
+                <h1 className="ml-4">{cloth.title}</h1>
+                <h3 className="ml-4">{cloth.price}</h3>
+                <button
+                  onClick={() => addToCart(cloth)}
+                  className="text-white float-right bg-green-900 p-2 text-center rounded-full"
+                >
+                  add to cart
+                </button>
+              </div>
+            </li>
           ))}
         </ul>
       </div>
